@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import CommentList from './CommentList'
 import PropTypes from 'prop-types'
 import {connect} from "react-redux";
-import {deleteArticle} from "../AC";
+import Loader from './Loader';
+import {deleteArticle, loadArticle} from "../AC";
 
     class Article extends Component {
         
@@ -12,6 +13,10 @@ import {deleteArticle} from "../AC";
               text:PropTypes.string.isRequired,
               title: PropTypes.string.isRequired
           })
+        }
+
+        componentWillReceiveProps({isOpen, loadArticle, article}) {
+            if(isOpen && !article.text) { loadArticle(article.id) }
         }
 
         render() {
@@ -34,8 +39,9 @@ import {deleteArticle} from "../AC";
          }
 
         getBody() {
-        const {article, isOpen} = this.props
+        const {article, isOpen} = this.props;
         if (isOpen) {
+            if(article.loading) {return <Loader /> }
               return (
             <section>
                {article.text}
@@ -47,4 +53,4 @@ import {deleteArticle} from "../AC";
       }
     }
 
-    export default connect(null, {deleteArticle})(Article)
+    export default connect(null, {deleteArticle, loadArticle})(Article)

@@ -6,3 +6,4 @@ export const LOAD_ALL_ARTICLES = 'LOAD_ALL_ARTICLES';
 export const START = 'START';
 export const SUCCESS = 'SUCCESS';   
 export const FAIL = 'FAIL';
+export const LOAD_ARTICLE = 'LOAD_ARTICLE';
