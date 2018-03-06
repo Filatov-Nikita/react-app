@@ -9,13 +9,13 @@ import {connect} from 'react-redux';
     class CommentList extends Component {
 
         componentWillReceiveProps({isOpen, article, loadArticleComments}) {
-            console.log(1);
-            if(isOpen&& !article.loadingComments && !article.loadComments) {
+            if(isOpen && !article.loadingComments && !article.loadComments) {
                 loadArticleComments(article.id);
             }
         }
 
         render() {
+            console.log(1);
             const {article, isOpen, toggleOpen} = this.props;
             const text = isOpen ? 'hide comments' : 'show comments'
             return (

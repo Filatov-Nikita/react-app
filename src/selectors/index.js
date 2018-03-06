@@ -22,7 +22,7 @@ export const filtratedArticlesSelector = createSelector(articlesGetter, dateRang
 
 export const commentSelectorFactory = () => createSelector(commentsGetter, idGetter, (comments, id) => {
    // console.log('---', 'update');
-   console.log(comments);
+   //console.log(comments);
     return comments.get(id);
 })
 //console.dir(filtratedArticlesSelector);
