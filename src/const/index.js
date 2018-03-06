@@ -7,3 +7,5 @@ export const START = 'START';
 export const SUCCESS = 'SUCCESS';   
 export const FAIL = 'FAIL';
 export const LOAD_ARTICLE = 'LOAD_ARTICLE';
+export const LOAD_COMMENT = 'LOAD_COMMENT';
+export const LOAD_ARTICLE_COMMENTS = 'LOAD_ARTICLE_COMMENTS';

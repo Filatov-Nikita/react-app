@@ -11,8 +11,8 @@ export default (OriginalComponent) => class WpappedComponent extends ReactCompon
                 toggleOpen = {this.toogleText}/>
     }
     toogleText = () => {
-        console.log(this);
-        console.log(this);
+        // console.log(this);
+        // console.log(this);
         this.setState({
             isOpen: !this.state.isOpen
         })

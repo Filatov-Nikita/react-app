@@ -1,4 +1,5 @@
-import {INCREMENT, DELETE_ARTICLE, SET_DATE, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE, START, SUCCESS, FAIL} from "../const";
+import {INCREMENT, DELETE_ARTICLE, SET_DATE, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE, 
+    START, SUCCESS, FAIL, LOAD_ARTICLE_COMMENTS} from "../const";
 
 export default function increment() {
     return {
@@ -55,5 +56,12 @@ export function loadArticle(id) {
                 payload: {id, error}
             }))
         }, 1000);
+    }
+}
+export function loadArticleComments(id) {
+    return  {
+        type: LOAD_ARTICLE_COMMENTS,
+        payload: { id },
+        callAPI: `/api/comment?article=${id}`
     }
 }

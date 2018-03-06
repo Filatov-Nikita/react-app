@@ -3,7 +3,7 @@ import { mapToArr } from "../helpers";
 
 const articlesGetter = state => state.articles.entities;
 const dateRangeGetter = state => state.dateRange;
-const commentsGetter = state => state.comments;
+const commentsGetter = state => state.comments.entities;
 const idGetter = (state, props) => props.id;
 
 
@@ -21,7 +21,8 @@ export const filtratedArticlesSelector = createSelector(articlesGetter, dateRang
 }) 
 
 export const commentSelectorFactory = () => createSelector(commentsGetter, idGetter, (comments, id) => {
-    console.log('---', 'update');
-    return comments[id];
+   // console.log('---', 'update');
+   console.log(comments);
+    return comments.get(id);
 })
 //console.dir(filtratedArticlesSelector);

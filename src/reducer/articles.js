@@ -1,5 +1,5 @@
 import {normalizedArticles as articles} from "../dataArticles";
-import {DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, START, SUCCESS, LOAD_ARTICLE} from "../const";
+import {DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, START, SUCCESS, LOAD_ARTICLE, LOAD_ARTICLE_COMMENTS} from "../const";
 import {arrToMap} from "../helpers";
 import { OrderedMap, Record } from "immutable";
 
@@ -8,13 +8,17 @@ const ArticleRecord = Record({
     title: '', 
     id: undefined, 
     loading: false,
-    comments: []
-})
+    comments: [],
+    loadingComments:false,
+    loadComments: false
+});
+
 const RecordState = Record({
     loading: false,
     isLoad: false,
     entities: new OrderedMap({})
 });
+
 const defaultState = new RecordState();
 
     export default (articleState = defaultState, action) => {
@@ -36,10 +40,15 @@ const defaultState = new RecordState();
             case LOAD_ARTICLE + START: 
                 return articleState.setIn(['entities', payload.id, 'loading'], true);
 
-            case LOAD_ARTICLE + SUCCESS: 
+            case LOAD_ARTICLE + SUCCESS:             
                 return articleState.setIn(['entities', payload.id], new ArticleRecord(payload.response));
+            case LOAD_ARTICLE_COMMENTS + START: 
+                 return articleState.setIn(['entities', payload.id, 'loadingComments'], true);
+            case LOAD_ARTICLE_COMMENTS + SUCCESS: 
+                 return articleState.setIn(['entities', payload.id, 'loadComments'], true).setIn(['entities', payload.id, 'loadingComments'], false);;
         }
 
         return articleState
     }
 
+        
