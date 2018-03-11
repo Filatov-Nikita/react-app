@@ -8,6 +8,8 @@ import {deleteArticle, loadArticle} from "../AC";
     class Article extends Component {
         
         static PropTypes = {
+            id: PropTypes.string.isRequired,
+            //from connect
           article: PropTypes.shape({
               id: PropTypes.string.isRequired,
               text:PropTypes.string.isRequired,
@@ -15,12 +17,17 @@ import {deleteArticle, loadArticle} from "../AC";
           })
         }
 
+        state = {
+            update: 0
+        }
+
         componentWillReceiveProps({isOpen, loadArticle, article}) {
-            if(isOpen && !article.text) { loadArticle(article.id) }
+            if(!article || (isOpen && !article.text && !article.loading)) { loadArticle(article.id) }
         }
 
         render() {
             const {article, isOpen, toogleOpen} = this.props;
+            if(!article) return null
             return (
                 <div>
                     <h3>{article.title}</h3>
@@ -53,4 +60,6 @@ import {deleteArticle, loadArticle} from "../AC";
       }
     }
 
-    export default connect(null, {deleteArticle, loadArticle})(Article)
+    export default connect((state, ownProps) => ({
+        article: state.articles.entities.get(ownProps.id)
+    }), {deleteArticle, loadArticle})(Article)

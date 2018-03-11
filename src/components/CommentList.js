@@ -15,7 +15,8 @@ import {connect} from 'react-redux';
         }
 
         render() {
-            console.log(1);
+           // console.log(1);
+            //console.log(this.props.isOpen);
             const {article, isOpen, toggleOpen} = this.props;
             const text = isOpen ? 'hide comments' : 'show comments'
             return (
@@ -37,13 +38,14 @@ CommentList.propTypes = {
 
 function getBody({article:{comments = [], id, loadingComments, loadComments}, isOpen}) {
    // console.log(comments);
+  
     if (isOpen) {
         if (!loadComments) return null
           if (!comments.length) {
               return (
                   <div>
                     <p>No comments yet</p>
-                    <CommentForm articleId = {id} />
+                    <FormInput articleId = {id} />
                   </div>
               )
           } else {
